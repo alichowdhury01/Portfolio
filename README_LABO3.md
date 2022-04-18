@@ -1,5 +1,5 @@
 # Nom
-Labo 2
+Labo 3
 # Description
 Ce labo met en pratique tout ce qui a été jusqu'à la semaine 6. Ainsi, on rajoute les pratique du labo 1 et 2. Ainsi que l'utilisation de boucle «For» et «whilw»
 # Utilisation
