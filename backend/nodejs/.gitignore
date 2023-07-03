@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+
+# Compiled JavaScript (if using TypeScript)
+dist/
+
+# Logs
+logs/
+.env
+
+# macOS-specific files
+.DS_Store
+rootkey.csv
+MN`;^j)y5]NU#}J4;&6]wN5^d{&$.pem
