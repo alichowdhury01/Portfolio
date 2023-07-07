@@ -64,5 +64,5 @@ userSchema.pre<IUser>('save', async function (next) {
   }
 });
 
-export { UserCounter, IUser, IUserCounter };
+export { UserCounter, IUser, IUserCounter, userSchema };
 export default mongoose.model<IUser>('User', userSchema, 'users');
