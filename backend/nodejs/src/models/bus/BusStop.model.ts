@@ -28,7 +28,6 @@ const busStopSchema = new mongoose.Schema<IBusStop>({
     busStopName: {type: String, required: true},
     busStopNumber: {type: String, required: true},
     busStopStreet: {type: String, required: true},
-    busStopStreetCorner: {type: String, required: true},
     busStopStatus: {
         type: String,
         enum: ['active', 'inactive', 'pending'], // Update enum values as needed

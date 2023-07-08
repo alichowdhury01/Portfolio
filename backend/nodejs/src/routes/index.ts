@@ -4,8 +4,9 @@ import EmployeeRoutes from "./EmployeeRoute";
 import TenantRoutes from "./TenantRoute";
 import ServiceRoutes from "./ServiceRoute";
 import LoginRoute from "./LoginRoute";
-import BusRoute from "./Bus.route";
+import Bus from "./Bus.route";
 import BusStopRoute from "./BusStop.route";
+import BusRouteRoute from "./BusRoute.route";
 
 const router = express.Router();
 
@@ -14,9 +15,8 @@ router.use("/employees", EmployeeRoutes);
 router.use("/tenants", TenantRoutes);
 router.use("/services", ServiceRoutes);
 router.use("/login", LoginRoute);
-router.use("/buses", BusRoute);
+router.use("/buses", Bus);
 router.use("/busStops", BusStopRoute);
-
-
+router.use("/busRoutes", BusRouteRoute);
 
 export default router;
