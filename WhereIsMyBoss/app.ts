@@ -4,7 +4,7 @@ import { exec } from 'child_process';
 // Configuration
 const wifiInterface = 'wlan0'; // Change this to your Wi-Fi interface name
 const targetMacAddress = '00:11:22:33:44:55'; // Change this to the MAC address you want to monitor
-const emailRecipient = 'your-email@example.com'; // Change this to your email address
+const emailRecipient = 'example@example.com'; // Change this to your email address
 
 let previousStatus: boolean | null = null; // Previous connection status
 
@@ -25,15 +25,15 @@ function pingTargetDevice(): Promise<boolean> {
 function sendEmailNotification(status: boolean): void {
   if (previousStatus === null || status !== previousStatus) {
     const transporter = nodemailer.createTransport({
-      service: 'Outlook365',
+      service: 'Outlook365', // Change this to your email service provider
       auth: {
-        user: 'your-gmail-username@hotmail.com',
-        pass: 'your-outlook-password',
+        user: 'example@hotmail.com', // Change this to your Outlook email address
+        pass: 'password', // Change this to your Outlook password
       },
     });
 
     const mailOptions = {
-      from: 'your-outlook-username@hotmail.com',
+      from: 'example@hotmail.com', // Change this to your Outlook email address
       to: emailRecipient,
       subject: 'Wi-Fi Monitoring',
       text: `MAC address ${targetMacAddress} is ${
