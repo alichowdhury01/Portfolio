@@ -23,3 +23,14 @@ Enjoy !
              
 ## Java Spring boot 
 Project ongoing not properly working yet
+
+# Where Is My Boss
+Won't work with GMail
+
+### How to deploy :
+1. Pull the git project
+2. npm i
+3. npx tsc
+node app.js
+
+Voilà 
