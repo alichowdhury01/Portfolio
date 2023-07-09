@@ -25,15 +25,15 @@ function pingTargetDevice(): Promise<boolean> {
 function sendEmailNotification(status: boolean): void {
   if (previousStatus === null || status !== previousStatus) {
     const transporter = nodemailer.createTransport({
-      service: 'Gmail',
+      service: 'Outlook365',
       auth: {
-        user: 'your-gmail-username@gmail.com',
-        pass: 'your-gmail-password',
+        user: 'your-gmail-username@hotmail.com',
+        pass: 'your-outlook-password',
       },
     });
 
     const mailOptions = {
-      from: 'your-gmail-username@gmail.com',
+      from: 'your-outlook-username@hotmail.com',
       to: emailRecipient,
       subject: 'Wi-Fi Monitoring',
       text: `MAC address ${targetMacAddress} is ${
