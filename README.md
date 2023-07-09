@@ -31,6 +31,6 @@ Won't work with GMail
 1. Pull the git project
 2. npm i
 3. npx tsc
-node app.js
+4. node app.js
 
 Voilà 
