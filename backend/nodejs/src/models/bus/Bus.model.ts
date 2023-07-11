@@ -1,10 +1,9 @@
 import mongoose, { Document } from "mongoose";
-import User, {userSchema} from "../User";
 
 interface IBus extends Document {
-    busNumber: string;
-    busModel: string;
+    busNumber: string;    
     busMake: string;
+    busModel: string;
     busYear: string;
     busCapacity: string;
     busEngineNumber: string;
@@ -12,9 +11,8 @@ interface IBus extends Document {
     busChasisNumber: string;
     busStatus: 'active' | 'inactive' | 'pending'; // Update enum values as needed
     busPlateNumber: string;
+    busRoute: any[];
     dateCreated: Date;
-    busSchedule: [Array<object>];
-
 }
 
 interface IBusCounter extends Document {
@@ -27,37 +25,31 @@ const busCounterSchema = new mongoose.Schema<IBusCounter>({
     seq: { type: Number, default: 0 },
 });
 
-const BusCounter = mongoose.model<IBusCounter>('BusCounter', busCounterSchema);
+const BusCounter = mongoose.model<IBusCounter>('BusCounter', busCounterSchema, 'BusCounter');
 
 const busSchema = new mongoose.Schema<IBus>(
     {
         _id: { type: Number },
-        busNumber: { type: String, required: true },
-        busModel: { type: String, required: true },
+        busNumber: { type: String, required: true, unique: true },       
         busMake: { type: String, required: true },
+        busModel: { type: String, required: true },
         busYear: { type: String, required: true },
         busCapacity: { type: String, required: true },
-        busEngineNumber: { type: String, required: true },
+        busEngineNumber: { type: String, required: true, unique: true },
         busEngineType: {
             type: String,
             enum: ['petrol', 'diesel', 'electric', 'hybrid'], // Update enum values as needed
             required: true,
         },
-        busChasisNumber: { type: String, required: true },
+        busChasisNumber: { type: String, required: true, unique: true },
         busStatus: {
             type: String,
             enum: ['active', 'inactive', 'pending'], // Update enum values as needed
             required: true,
         },
-        busPlateNumber: { type: String, required: true },
-        dateCreated: { type: Date, default: Date.now },
-        busSchedule: [
-            {
-                schedule: { 
-                    type: userSchema, unique: true
-                },
-            }
-        ]
+        busPlateNumber: { type: String, required: true, unique: true },
+        busRoute: [], 
+        dateCreated: { type: Date, default: Date.now }
     }
 );
 
@@ -79,6 +71,6 @@ busSchema.pre<IBus>('save', async function (next) {
 });
 
 export { BusCounter, IBus, IBusCounter}
-export default mongoose.model<IBus>('Bus', busSchema, 'buses');
+export default mongoose.model<IBus>('Bus', busSchema, 'Bus');
 
 

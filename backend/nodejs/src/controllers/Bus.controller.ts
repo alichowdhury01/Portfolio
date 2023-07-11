@@ -3,7 +3,7 @@ import Bus,{ BusCounter, IBus, IBusCounter } from '../models/bus/Bus.model';
 
 export class BusController {
   
-    // Get all buses
+    // Get all buses   
     public async getAllBuses(req: Request, res: Response): Promise<void> {
       try {
         const buses = await Bus.find();
@@ -33,7 +33,7 @@ export class BusController {
   public async createBus(req: Request, res: Response): Promise<void> {
     try {
       const busData: IBus = req.body;
-      
+
       // Get the next bus ID from the counter collection
       const counter: IBusCounter = await BusCounter.findByIdAndUpdate(
         { _id: 'busId' },

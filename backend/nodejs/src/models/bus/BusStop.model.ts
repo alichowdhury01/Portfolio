@@ -33,7 +33,7 @@ const busStopSchema = new mongoose.Schema<IBusStop>({
         enum: ['active', 'inactive', 'pending'], // Update enum values as needed
         required: true,
     },
-    busStopDescription: {type: String, required: true},
+    busStopDescription: {type: String, default: ''},
     busStand: {type: Boolean, required: true},
     dateCreated: {type: Date, default: Date.now},
 });
