@@ -1,7 +1,6 @@
 import mongoose, { Document } from "mongoose";
 
 interface IBusStop extends Document {
-    busStopName: string;
     busStopNumber: string;
     busStopStreet: string;
     busStopStreetCorner: string;
@@ -25,9 +24,9 @@ const BusStopCounter = mongoose.model<IBusStopCounter>('BusStopCounter', busStop
 
 const busStopSchema = new mongoose.Schema<IBusStop>({
     _id: {type: Number},
-    busStopName: {type: String, required: true},
-    busStopNumber: {type: String, required: true},
+    busStopNumber: {type: String, required: true, unique: true},
     busStopStreet: {type: String, required: true},
+    busStopStreetCorner: {type: String, required: true},
     busStopStatus: {
         type: String,
         enum: ['active', 'inactive', 'pending'], // Update enum values as needed
