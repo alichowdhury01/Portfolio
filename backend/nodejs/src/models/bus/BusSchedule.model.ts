@@ -1,4 +1,5 @@
 import mongoose, { Document } from "mongoose";
+import moment from "moment";
 
 interface IBusSchedule extends Document {
     busScheduleNumber: string;
@@ -10,7 +11,7 @@ interface IBusSchedule extends Document {
         {
             shedule:{
                             status: 'active' | 'inactive' | 'pending'; // Update enum values as needed
-            arrivalTime: Date;
+            arrivalTime: string;
             busStop: []
             }
 
@@ -48,7 +49,16 @@ const busScheduleSchema = new mongoose.Schema<IBusSchedule>({
                 type: String,
                 enum: ['active', 'inactive', 'pending'], // Update enum values as needed
             },
-            arrivalTime: {type: Date},
+            arrivalTime: {
+                type: String,
+                get: function (time: string) {
+                    return time ? moment(time, 'HH:mm').format('HH:mm') : '';
+                },
+                set: function (timeString: string) {
+                    const parsedTime = moment(timeString, 'HH:mm');
+                    return parsedTime.isValid() ? parsedTime.format('HH:mm') : '';
+                },
+            },
             busStop: []
         }
     ],
