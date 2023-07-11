@@ -44,14 +44,12 @@ const busScheduleSchema = new mongoose.Schema<IBusSchedule>({
     busScheduleDescription: {type: String, default: ''},
     busSchedule: [
         {
-            schedule: {
-                status: {
-                    type: String,
-                    enum: ['active', 'inactive', 'pending'], // Update enum values as needed
-                },
+            status: {
+                type: String,
+                enum: ['active', 'inactive', 'pending'], // Update enum values as needed
+            },
             arrivalTime: {type: Date},
             busStop: []
-            }
         }
     ],
     dateCreated: {type: Date, default: Date.now},
