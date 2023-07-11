@@ -80,30 +80,30 @@ export class BusRouteController{
 
 
     
-    // public async patchBusRoute(req: Request, res: Response): Promise<void> {
-    //     try {
-    //         const BusRoute = mongoose.model('BusRoute');
-    //         const BusStop = mongoose.model('BusStop');
-    //         const busRouteId = req.params.id; // ID of the document from Collection BusRoute
-    //         const busStopId = req.body.id; // ID of the document from Collection BusStop
+    public async patchBusRoute(req: Request, res: Response): Promise<void> {
+        try {
+            const BusRoute = mongoose.model('BusRoute'); // Retrieve the model BusRoute
+            const BusSchedule = mongoose.model('BusSchedule'); // Retrieve the model BusSchedule
+            const busRouteId = req.params.id; // ID of the document from Collection BusRoute
+            const busScheduleId = req.body.id; // ID of the document from Collection BusSchedule
 
-    //         // Retrieve the document from Collection BusRoute
-    //         const busRoute: any = await BusRoute.findById(busRouteId);
+            // Retrieve the document from Collection BusRoute
+            const busRoute: any = await BusRoute.findById(busRouteId);
 
-    //         // Retrieve the document from Collection BusStop
-    //         const busStop: any = await BusStop.findById(busStopId);
+            // Retrieve the document from Collection BusSchedule
+            const busSchedule: any = await BusSchedule.findById(busScheduleId);
 
-    //         // Update the routeStops field with the fields from the document in Collection BusStop
-    //         busRoute.routeStops.push(busStop);
+        // Push the document from Collection BusSchedule to the field routeSchedule of the document from Collection BusRoute
+            busRoute.routeSchedule.push(busSchedule);
 
-    //         // Save the updated document from Collection BusRoute
-    //         const updatedBusRoute: any = await busRoute.save();
+            // Save the updated document from Collection BusRoute
+            const updatedBusRoute: any = await busRoute.save();
 
-    //         res.status(200).json(updatedBusRoute);
-    //     } catch (error: any) {
-    //         res.status(500).json({ error: error.message });
-    //     }
-    // }
+            res.status(200).json(updatedBusRoute);
+        } catch (error: any) {
+            res.status(500).json({ error: error.message });
+        }
+    }
     
 
 
