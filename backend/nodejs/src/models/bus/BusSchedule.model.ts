@@ -7,16 +7,15 @@ interface IBusSchedule extends Document {
     busScheduleEnd: Date;
     busScheduleStatus: 'active' | 'inactive' | 'pending'; // Update enum values as needed
     busScheduleDescription: string;
-    busSchedule: [
+    busSchedule: 
         {
-            shedule:{
-                            status: 'active' | 'inactive' | 'pending'; // Update enum values as needed
+            
+            status: 'active' | 'inactive' | 'pending'; // Update enum values as needed
             arrivalTime: string;
-            busStop: []
-            }
+            busStop: Array<any>;
+            
 
-        }
-    ]
+        }[];
     dateCreated: Date;
 }
 
