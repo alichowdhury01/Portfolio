@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Bus,{ BusCounter, IBus, IBusCounter } from '../models/bus/Bus.model';
+import mongoose from 'mongoose';
 
 export class BusController {
   
@@ -68,7 +69,39 @@ export class BusController {
         res.status(500).json({ error: 'Internal server error' });
       }
     }
-  
+
+    // Patch busRoute to bus
+    public async patchBus(req: Request, res: Response): Promise<void> {
+      try {
+        const Bus = mongoose.model('Bus');
+        const BusRoute = mongoose.model('BusRoute');
+        const busId = req.params.id;
+        const busRouteId = req.body.busRouteId;
+
+        // Check if bus exists
+        const bus = await Bus.findById(busId);
+        if (!bus) {
+          res.status(404).json({ error: 'Bus not found' });
+          return;
+        }
+
+        // Check if busRoute exists
+        const busRoute = await BusRoute.findById(busRouteId);
+        if (!busRoute) {
+          res.status(404).json({ error: 'BusRoute not found' });
+          return;
+        }
+
+        bus.busRoute.push(busRoute);
+
+        const updatedBus = await bus.save();
+
+        res.status(200).json(updatedBus);
+      } catch (error: any) {
+        res.status(500).json({ error: 'Internal server error' });
+      }
+    }
+    
     // Delete a bus
     public async deleteBus(req: Request, res: Response): Promise<void> {
       const busId = req.params.id;
