@@ -1,5 +1,6 @@
 import e, { Request, Response } from 'express';
 import BusSchedule, { IBusSchedule, IBusScheduleCounter, BusScheduleCounter } from '../models/bus/BusSchedule.model';
+import mongoose from 'mongoose';
 
 export class BusScheduleController {
 
@@ -71,6 +72,35 @@ export class BusScheduleController {
             res.status(500).json({ error: 'Internal server error' });
         }
     }
+
+    // Patch an existing bus schedule
+    public async patchBusSchedule(req: Request, res: Response): Promise<void> {
+        try {
+          const BusSchedule = mongoose.model('BusSchedule');
+          const BusStop = mongoose.model('BusStop');
+          const busScheduleId = req.params.id;
+          const busStopId = req.body._id;
+          const busStopIdObj = req.body._idObj;
+      
+          const busSchedule = await BusSchedule.findById(busScheduleId);
+          const busStop = await BusStop.findById(busStopId);
+      
+          const busScheduleIndex = busSchedule.busSchedule.findIndex(
+            (schedule: any) => schedule._id.toString() === busStopIdObj
+          );
+      
+          if (busScheduleIndex !== -1) {
+            busSchedule.busSchedule[busScheduleIndex].busStop.push(busStop);
+            const updatedBusSchedule = await busSchedule.save();
+            res.status(200).json(updatedBusSchedule);
+          } else {
+            throw new Error('Bus stop not found in the bus schedule.');
+          }
+        } catch (error: any) {
+          res.status(500).json({ error: error.message });
+        }
+      }
+      
 
     // Delete an existing bus schedule
     public async deleteBusSchedule(req: Request, res: Response): Promise<void> {
