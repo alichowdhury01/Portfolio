@@ -1,0 +1,35 @@
+{
+  "name": "leaseapp",
+  "version": "1.0.0",
+  "description": "backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon --exec ts-node src/index.ts"
+  },
+  "author": "Ali",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.4.4",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
+    "mongoose": "^7.4.0",
+    "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.13",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.17",
+    "@types/http-status-codes": "^1.2.0",
+    "@types/moment": "^2.13.0",
+    "@types/mongoose": "^5.11.97",
+    "@types/nodemon": "^1.19.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
+}
