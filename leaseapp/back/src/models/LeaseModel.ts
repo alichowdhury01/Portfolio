@@ -31,7 +31,7 @@ interface ISectionA extends Document {
 
 }
 
-interface IleaseDestinationAndDescription extends Document{
+interface ILeaseDestinationAndDescription extends Document{
   addressNo: string;
   street: string;
   apt: string;
@@ -62,8 +62,8 @@ interface IleaseDestinationAndDescription extends Document{
   furniture?: {
       table: boolean;
       tableNbr?: number; // Only used when table is true
-      Chairs: boolean;
-      ChairsNbr?: number; // Only used when tableAndChairs is true
+      chairs: boolean;
+      chairsNbr?: number; // Only used when tableAndChairs is true
       chestOfDrawers: boolean;
       chestOfDrawersNbr?: number; // Only used when chestOfDrawers is true
       couch: boolean;
@@ -87,7 +87,7 @@ interface IleaseDestinationAndDescription extends Document{
 
 
 interface ISectionB extends Document {
-  IleaseDestinationAndDescription: IleaseDestinationAndDescription;
+  IleaseDestinationAndDescription: ILeaseDestinationAndDescription;
 
 }
 
@@ -120,15 +120,15 @@ const lesseeSchema = new Schema<ILessee>({
   emailAddress: { type: String, required: true },
 });
 
-const leaseDestinationAndDescriptionSchema = new Schema<IleaseDestinationAndDescription>({
+const leaseDestinationAndDescriptionSchema = new Schema<ILeaseDestinationAndDescription>({
   addressNo: { type: String, required: true },
   street: { type: String, required: true },
-  apt: { type: String, required: true },
+  apt: { type: String, default: null},
   municipality: { type: String, required: true },
   postalCode: { type: String, required: true },
   numberOfRooms: { type: Number, required: true },
-  residentialOnly: { type: Boolean, required: true },
-  combinedPurposes: { type: String, default: null, required: function () { return this.residentialOnly === false; } }, // Only used when residentialOnly is false
+  residentialOnly: { type: Boolean, default: null},
+  combinedPurposes: { type: String, default: null}, // Only used when residentialOnly is false
   unitUnderCoOwnership: { type: Boolean, required: true },
   outdoorParking: { type: Boolean, required: true },
   nbrOfOutdoorParkingPlaces: { type: Number, default: null, required: function () { return this.outdoorParking === true; } }, // Only used when outdoorParking is true
@@ -151,8 +151,8 @@ const leaseDestinationAndDescriptionSchema = new Schema<IleaseDestinationAndDesc
   furniture: {
     table: { type: Boolean, default: false, required: function () { return this.furnitureIncluded === true; } },
     tableNbr: { type: Number, default: null, required: function () { return this.table === true; } }, // Only used when table is true
-    Chairs: { type: Boolean, default: false, required: function () { return this.furnitureIncluded === true; } },
-    ChairsNbr: { type: Number, default: null, required: function () { return this.Chairs === true; } }, // Only used when tableAndChairs is true
+    chairs: { type: Boolean, default: false, required: function () { return this.furnitureIncluded === true; } },
+    chairsNbr: { type: Number, default: null, required: function () { return this.Chairs === true; } }, // Only used when tableAndChairs is true
     chestOfDrawers: { type: Boolean, default: false, required: function () { return this.furnitureIncluded === true; } },
     chestOfDrawersNbr: { type: Number, default: null, required: function () { return this.chestOfDrawers === true; } }, // Only used when chestOfDrawers is true
     couch: { type: Boolean, default: false, required: function () { return this.furnitureIncluded === true; } },
@@ -188,7 +188,7 @@ const leaseSchema = new Schema<ILease>({
 
 const LeaseModel = mongoose.model<ILease>('Lease', leaseSchema);
 
-export { LeaseModel, ILease, ILessor, ILessee, ISectionA, ISectionB, IleaseDestinationAndDescription };
+export { LeaseModel, ILease, ILessor, ILessee, ISectionA, ISectionB, ILeaseDestinationAndDescription };
 export default LeaseModel;
 
 
