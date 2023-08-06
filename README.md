@@ -1,4 +1,10 @@
-# Portfolio
+# PORTFOLIO
+
+# Scraping Project
+## Ongoing
+This is a Google Chrome extension project. The goal is to enable users to retrieve all types of data by simply hovering over and clicking on a desired element of any webpage. Additionally, the extension should allow users to save, monitor, and update the collected data.
+
+
 
 # Backend
 This project is a template of a Restful MVC CRUD backend MongoDB
@@ -34,3 +40,4 @@ Won't work with GMail
 4. node app.js
 
 Voilà 
+
